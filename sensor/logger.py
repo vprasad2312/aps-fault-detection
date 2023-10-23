@@ -3,23 +3,21 @@ import os
 from datetime import datetime
 import os
 
-
-#log file Name
-Log_File_Name =f"{datetime.now().strftime('%m%d%Y__%H%M%S')}.log"
+#log file name
+LOG_FILE_NAME = f"{datetime.now().strftime('%m%d%Y__%H%M%S')}.log"
 
 #log directory
-Log_File_Dir = os.path.join(os.getcwd()."logs")
+LOG_FILE_DIR = os.path.join(os.getcwd(),"logs")
 
 #create folder if not available
-os.makedirs(Log_File_Dir,exist_ok=True)
+os.makedirs(LOG_FILE_DIR,exist_ok=True)
 
-#log File path
+#log file path
 
-Log_File_Path = os.path.join(Log_File_Dir,Log_File_Name)
-
+LOG_FILE_PATH = os.path.join(LOG_FILE_DIR,LOG_FILE_NAME)
 
 logging.basicConfig(
-    filename= Log_File_Path,
+    filename=LOG_FILE_PATH,
     format="[ %(asctime)s ] %(lineno)d %(name)s - %(levelname)s - %(message)s",
-    level= logging.INFO,
+    level=logging.INFO,
 )
