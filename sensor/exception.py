@@ -1,25 +1,20 @@
-import logging
-import os
-from datetime import datetime
-import os
+import sys,os
+
+def error_message_detail(error, error_detail: sys):
+    _, _, exc_tb = error_detail.exc_info()
+    file_name = exc_tb.tb_frame.f_code.co_filename
+    error_message = "Error occurred python script name [{0}] line number [{1}] error message [{2}]".format(
+        file_name, exc_tb.tb_lineno, str(error)
+    )
+    return error_message
 
 
-#log file Name
-Log_File_Name =f"{datetime.now().strftime('%m%d%Y__%H%M%S')}.log"
 
-#log directory
-Log_File_Dir = os.path.join(os.getcwd()."logs")
+class SensorException(Exception):
 
-#create folder if not available
-os.makedirs(Log_File_Dir,exist_ok=True)
+    def __init__(self,error_message, error_detail:sys):
+        self.error_message = error_message_detail(
+            error_message, error_detail=error_detail)
 
-#log File path
-
-Log_File_Path = os.path.join(Log_File_Dir,Log_File_Name)
-
-
-logging.basicConfig(
-    filename= Log_File_Path,
-    format="[ %(asctime)s ] %(lineno)d %(name)s - %(levelname)s - %(message)s",
-    level= logging.INFO,
-)
+    def __str__(self):
+        return self.error_message
